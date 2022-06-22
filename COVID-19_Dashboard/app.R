@@ -78,48 +78,6 @@ server <- function(input, output, session) {
   observeEvent(input$idNavbarPage, updateNavbarPage(session, 'idCasesDateType', 'Daily'))
   
   # Cases ----------------------------------------------------------------------
-  observeEvent(input$idCasesDateType, {
-    
-    cat('View Selection changed!\n')
-    
-    switch(
-      input$idCasesDateType,
-      'Daily' = {
-        data <- GetDateData(cases_C, 'day')
-        cat('Selected Daily\n')
-        updateDateInput(session, 'minDate_Cases', max = max(data$Date) - 6)
-        updateDateInput(session, 'minDate_Cases', value = min(data$Date))
-        updateDateInput(session, 'maxDate_Cases', min = min(data$Date) + 6)
-        updateDateInput(session, 'maxDate_Cases', value = max(data$Date))
-      },
-      'Weekly' = {
-        data <- GetDateData(cases_C, 'week')
-        cat('Selected Weekly\n')
-        updateDateInput(session, 'minDate_Cases', max = max(data$Date) - 34)
-        updateDateInput(session, 'minDate_Cases', value = min(data$Date))
-        updateDateInput(session, 'maxDate_Cases', min = min(data$Date) + 34)
-        updateDateInput(session, 'maxDate_Cases', value = max(data$Date))
-      },
-      'Monthly' = {
-        data <- GetDateData(cases_C, 'month')
-        cat('Selected Monthly\n')
-        updateDateInput(session, 'minDate_Cases', max = max(data$Date) %m-% months(5))
-        updateDateInput(session, 'minDate_Cases', value = min(data$Date))
-        updateDateInput(session, 'maxDate_Cases', min = min(data$Date) %m+% months(5))
-        updateDateInput(session, 'maxDate_Cases', value = max(data$Date))
-      },
-      'Yearly' = {
-        updateDateInput(session, 'minDate_Cases', value = min(cases_C$Date))
-        updateDateInput(session, 'maxDate_Cases', value = max(cases_C$Date))
-        
-        # Disable the input - user cannot select input for the year view
-        shinyjs::disable('maxDate_Cases')
-      }
-    )
-    cat('Min date - ', format(input$minDate_Cases, '%B %d, %Y'), '\n')
-    cat('Max date - ', format(input$maxDate_Cases, '%B %d, %Y'), '\n\n')
-  })
-  
   observeEvent(input$minDate_Cases, {
     switch(
       input$idCasesDateType,
@@ -140,9 +98,7 @@ server <- function(input, output, session) {
   # Update the start date input based on the selected view
   output$minDate_Cases <- renderUI({
     req(input$idCasesDateType)
-    
-    cat('renderUI - minDate\n')
-    
+    cat('renderUI: minDate\n\n')
     switch (
       input$idCasesDateType,
       'Daily' = {
@@ -155,21 +111,17 @@ server <- function(input, output, session) {
       },
       'Monthly' = {
         data <- GetDateData(cases_C, 'month')
-        min_date <- as.Date(min(floor_date(data$Date, 'month')))
-        max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
+        min_date <- min(floor_date(data$Date, 'month'))
+        max_date <- max(ceiling_date(data$Date, 'month')) - 1
         CustomDateInput('minDate_Cases', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
-      'Yearly' = {
-        shinyjs::disable('minDate_Cases')
-      }
+      'Yearly' = shinyjs::disable('minDate_Cases')
     )
   })
   # Update the end date input based on the selected view
   output$maxDate_Cases <- renderUI({
     req(input$idCasesDateType)
-    
-    cat('renderUI - maxDate\n')
-    
+    cat('renderUI: maxDate\n\n')
     switch (
       input$idCasesDateType,
       'Daily' = {
@@ -184,11 +136,9 @@ server <- function(input, output, session) {
         data <- GetDateData(cases_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('maxDate_Cases', 'End Date', minview = 'year', 'decades', max_date, min_date, max_date, 'M, yyyy', 'year')
+        CustomDateInput('maxDate_Cases', 'End Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
-      'Yearly' = {
-        shinyjs::disable('maxDate_Cases')
-      }
+      'Yearly' = shinyjs::disable('maxDate_Cases')
     )
   })
   
