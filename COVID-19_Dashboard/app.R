@@ -95,10 +95,9 @@ server <- function(input, output, session) {
     )
   })
 
-  # Update the start date input based on the selected view
   output$minDate_Cases <- renderUI({
     req(input$idCasesDateType)
-    cat('renderUI: minDate\n\n')
+    cat('\nrenderUI: minDate\n')
     switch (
       input$idCasesDateType,
       'Daily' = {
@@ -115,22 +114,25 @@ server <- function(input, output, session) {
         max_date <- max(ceiling_date(data$Date, 'month')) - 1
         CustomDateInput('minDate_Cases', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
-      'Yearly' = shinyjs::disable('minDate_Cases')
+      'Yearly' = {
+        data <- GetDateData(cases_C, 'year')
+        dateInput('minDate_Cases', 'Start Date', value = min(data$Date))
+        shinyjs::disable('minDate_Cases')
+      }
     )
   })
-  # Update the end date input based on the selected view
   output$maxDate_Cases <- renderUI({
     req(input$idCasesDateType)
-    cat('renderUI: maxDate\n\n')
+    cat('renderUI: maxDate\n')
     switch (
       input$idCasesDateType,
       'Daily' = {
         data <- GetDateData(cases_C, 'day')
-        dateInput('maxDate_Cases', 'End Date', max(data$Date), min(data$Date), max(data$Date), 'mm/dd/yyyy', 'month')
+        dateInput('maxDate_Cases', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(cases_C, 'week')
-        dateInput('maxDate_Cases', 'End Date', max(data$Date), min(data$Date), max(data$Date), 'mm/dd/yyyy', 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('maxDate_Cases', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(cases_C, 'month')
@@ -138,17 +140,16 @@ server <- function(input, output, session) {
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
         CustomDateInput('maxDate_Cases', 'End Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
-      'Yearly' = shinyjs::disable('maxDate_Cases')
+      'Yearly' = {
+        data <- GetDateData(cases_C, 'year')
+        dateInput('maxDate_Cases', 'Start Date', value = min(data$Date))
+        shinyjs::disable('minDate_Cases')
+      }
     )
   })
   
-  # Render the plot for the data using the selected inputs
   output$plotlyCases_C <- renderPlotly({
     req(input$minDate_Cases, input$maxDate_Cases, input$idCasesDateType)
-    
-    cat('Render plotly\n')
-    cat('Min date - ', format(input$minDate_Cases, '%B %d, %Y'), '\n')
-    cat('Max date - ', format(input$maxDate_Cases, '%B %d, %Y'), '\n\n')
     
     # Switch to determine view for graph
     switch(
@@ -199,10 +200,8 @@ server <- function(input, output, session) {
     plot <- plot %>% FormatY_Axis('Cases')
   })
   
-  # Render the footnote text for the plot
   output$textCases_C <- renderText({
     req(input$idCasesDateType, input$minDate_Cases, input$maxDate_Cases)
-    
     switch (
       input$idCasesDateType,
       'Daily'   = {
@@ -221,65 +220,35 @@ server <- function(input, output, session) {
         max_date <- format(max(ceiling_date(data$Date, 'month')) - 1, '%B, %Y')
       },
       'Yearly'  = {
-        data <- GetDateLimitedData(cases_C, input$minDate_Cases, input$maxDate_Cases, 'year')
+        data <- GetDateData(cases_C, 'year')
         min_date <- format(min(floor_date(data$Date, 'year')), '%Y')
         max_date <- format(max(ceiling_date(data$Date, 'year')) - 1, '%Y')
       }
     )
-    
+    cat(min_date)
     paste('<br><b>Note: The dates in 2020 of April 24th, April 29th, December 17th, and in 2021 of March 17th and December 29th were dates when laboratories uploaded backlogged data. Total cases represented in the graph between ', min_date, ' and ', max_date, ' (n=', format(sum(data$Cases), big.mark = ','), '). Total confirmed cases of COVID-19 reported as of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(cases_C$Cases), big.mark = ','), ')', '.</b><br><br>', sep = '')
   })
   
   # Symptomatic Cases ----------------------------------------------------------
-  # Change the minimum date of maxDate so maxDate cannot be less than minDate
   observeEvent(input$minDate_Symp, {
     switch(
       input$idCasesDateType,
-      'Daily' = {
-        data <- GetDateLimitedData(symptomatic_C, input$minDate_Symp, input$maxDate_Symp, 'day')
-        updateDateInput(session, 'maxDate_Symp', min = input$minDate_Symp + 6)
-      },
-      'Weekly' = {
-        data <- GetDateLimitedData(symptomatic_C, input$minDate_Symp, input$maxDate_Symp, 'week')
-        updateDateInput(session, 'maxDate_Symp', min = input$minDate_Symp + 34)
-      },
-      'Monthly' = {
-        data <- GetDateLimitedData(symptomatic_C, input$minDate_Symp, input$maxDate_Symp, 'month')
-        updateDateInput(session, 'maxDate_Symp', min = input$minDate_Symp %m+% months(5))
-      },
-      'Yearly' = {
-        updateDateInput(session, 'maxDate_Symp', value = max(symptomatic_C$Date))
-        shinyjs::disable('maxDate_Symp')
-      }
+      'Daily' = updateDateInput(session, 'maxDate_Symp', min = input$minDate_Symp + 6),
+      'Weekly' = updateDateInput(session, 'maxDate_Symp', min = input$minDate_Symp + 34),
+      'Monthly' = updateDateInput(session, 'maxDate_Symp', min = input$minDate_Symp %m+% months(5))
     )
   })
-  # Change the maximum date of minDate so minDate cannot be greater than maxDate
   observeEvent(input$maxDate_Symp, {
     switch(
       input$idCasesDateType,
-      'Daily' = {
-        data <- GetDateLimitedData(symptomatic_C, input$maxDate_Symp, input$minDate_Symp, 'day')
-        updateDateInput(session, 'minDate_Symp', max = input$maxDate_Symp - 6)
-      },
-      'Weekly' = {
-        data <- GetDateLimitedData(symptomatic_C, input$maxDate_Symp, input$minDate_Symp, 'week')
-        updateDateInput(session, 'minDate_Symp', max = input$maxDate_Symp - 34)
-      },
-      'Monthly' = {
-        data <- GetDateLimitedData(symptomatic_C, input$maxDate_Symp, input$minDate_Symp, 'month')
-        updateDateInput(session, 'minDate_Symp', max = input$maxDate_Symp %m-% months(5))
-      },
-      'Yearly' = {
-        updateDateInput(session, 'minDate_Symp', value = min(symptomatic_C$Date))
-        shinyjs::disable('maxDate_Symp')
-      }
+      'Daily' = updateDateInput(session, 'minDate_Symp', max = input$maxDate_Symp - 6),
+      'Weekly' = updateDateInput(session, 'minDate_Symp', max = input$maxDate_Symp - 34),
+      'Monthly' = updateDateInput(session, 'minDate_Symp', max = input$maxDate_Symp %m-% months(5))
     )
   })
   
-  # Update the start date input based on the selected view
   output$minDate_Symp <- renderUI({
     req(input$idCasesDateType)
-    
     switch (
       input$idCasesDateType,
       'Daily' = {
@@ -294,14 +263,11 @@ server <- function(input, output, session) {
         data <- GetDateData(symptomatic_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('minDate_Symp', 'Start Date', minview = 'year', 'decades', min_date, min_date, max_date, 'M, yyyy', 'year')
+        CustomDateInput('minDate_Symp', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
-      'Yearly' = {
-        shinyjs::disable('minDate_Symp')
-      }
+      'Yearly' = shinyjs::disable('minDate_Symp')
     )
   })
-  # Update the end date input based on the selected view
   output$maxDate_Symp <- renderUI({
     req(input$idCasesDateType)
     
@@ -309,25 +275,22 @@ server <- function(input, output, session) {
       input$idCasesDateType,
       'Daily' = {
         data <- GetDateData(symptomatic_C, 'day')
-        dateInput('maxDate_Symp', 'End Date', max(data$Date), min(data$Date), max(data$Date), 'mm/dd/yyyy', 'month')
+        dateInput('maxDate_Symp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(symptomatic_C, 'week')
-        dateInput('maxDate_Symp', 'End Date', max(data$Date), min(data$Date), max(data$Date), 'mm/dd/yyyy', 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('maxDate_Symp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(symptomatic_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('maxDate_Symp', 'End Date', minview = 'year', 'decades', max_date, min_date, max_date, 'M, yyyy', 'year')
+        CustomDateInput('maxDate_Symp', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
-      'Yearly' = {
-        shinyjs::disable('maxDate_Symp')
-      }
+      'Yearly' = shinyjs::disable('maxDate_Symp')
     )
   })
   
-  # Render the plot for the data using the selected inputs
   output$plotlySymptomatic_C <- renderPlotly({
     req(input$minDate_Symp, input$maxDate_Symp, input$idCasesDateType)
     
@@ -380,7 +343,6 @@ server <- function(input, output, session) {
     plot <- plot %>% FormatY_Axis('Cases')
   })
   
-  # Render the footnote text for the plot
   output$textSymp_C <- renderText({
     req(input$minDate_Symp, input$maxDate_Symp, input$idCasesDateType)
     
@@ -412,52 +374,23 @@ server <- function(input, output, session) {
   })
   
   # Asymptomatic Cases ---------------------------------------------------------
-  # Change the minimum date of maxDate so maxDate cannot be less than minDate
   observeEvent(input$minDate_Asymp, {
     switch(
       input$idCasesDateType,
-      'Daily' = {
-        data <- GetDateLimitedData(asymptomatic_C, input$minDate_Asymp, input$maxDate_Asymp, 'day')
-        updateDateInput(session, 'maxDate_Asymp', min = input$minDate_Asymp + 6)
-      },
-      'Weekly' = {
-        data <- GetDateLimitedData(asymptomatic_C, input$minDate_Asymp, input$maxDate_Asymp, 'week')
-        updateDateInput(session, 'maxDate_Asymp', min = input$minDate_Asymp + 34)
-      },
-      'Monthly' = {
-        data <- GetDateLimitedData(asymptomatic_C, input$minDate_Asymp, input$maxDate_Asymp, 'month')
-        updateDateInput(session, 'maxDate_Asymp', min = input$minDate_Asymp %m+% months(5))
-      },
-      'Yearly' = {
-        updateDateInput(session, 'maxDate_Asymp', value = max(asymptomatic_C$Date))
-        shinyjs::disable('maxDate_Asymp')
-      }
+      'Daily' = updateDateInput(session, 'maxDate_Asymp', min = input$minDate_Asymp + 6),
+      'Weekly' = updateDateInput(session, 'maxDate_Asymp', min = input$minDate_Asymp + 34),
+      'Monthly' = updateDateInput(session, 'maxDate_Asymp', min = input$minDate_Asymp %m+% months(5))
     )
   })
-  # Change the maximum date of minDate so minDate cannot be greater than maxDate
   observeEvent(input$maxDate_Asymp, {
     switch(
       input$idCasesDateType,
-      'Daily' = {
-        data <- GetDateLimitedData(asymptomatic_C, input$maxDate_Asymp, input$minDate_Asymp, 'day')
-        updateDateInput(session, 'minDate_Asymp', max = input$maxDate_Asymp - 6)
-      },
-      'Weekly' = {
-        data <- GetDateLimitedData(asymptomatic_C, input$maxDate_Asymp, input$minDate_Asymp, 'week')
-        updateDateInput(session, 'minDate_Asymp', max = input$maxDate_Asymp - 34)
-      },
-      'Monthly' = {
-        data <- GetDateLimitedData(asymptomatic_C, input$maxDate_Asymp, input$minDate_Asymp, 'month')
-        updateDateInput(session, 'minDate_Asymp', max = input$maxDate_Asymp %m-% months(5))
-      },
-      'Yearly' = {
-        updateDateInput(session, 'minDate_Asymp', value = min(asymptomatic_C$Date))
-        shinyjs::disable('maxDate_Asymp')
-      }
+      'Daily' = updateDateInput(session, 'minDate_Asymp', max = input$maxDate_Asymp - 6),
+      'Weekly' = updateDateInput(session, 'minDate_Asymp', max = input$maxDate_Asymp - 34),
+      'Monthly' = updateDateInput(session, 'minDate_Asymp', max = input$maxDate_Asymp %m-% months(5))
     )
   })
   
-  # Update the start date input based on the selected view
   output$minDate_Asymp <- renderUI({
     req(input$idCasesDateType)
     
@@ -475,14 +408,13 @@ server <- function(input, output, session) {
         data <- GetDateData(asymptomatic_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('minDate_Asymp', 'Start Date', minview = 'year', 'decades', min_date, min_date, max_date, 'M, yyyy', 'year')
+        CustomDateInput('minDate_Asymp', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
       'Yearly' = {
         shinyjs::disable('minDate_Asymp')
       }
     )
   })
-  # Update the end date input based on the selected view
   output$maxDate_Asymp <- renderUI({
     req(input$idCasesDateType)
     
@@ -490,17 +422,17 @@ server <- function(input, output, session) {
       input$idCasesDateType,
       'Daily' = {
         data <- GetDateData(asymptomatic_C, 'day')
-        dateInput('maxDate_Asymp', 'End Date', max(data$Date), min(data$Date), max(data$Date), 'mm/dd/yyyy', 'month')
+        dateInput('maxDate_Asymp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(asymptomatic_C, 'week')
-        dateInput('maxDate_Asymp', 'End Date', max(data$Date), min(data$Date), max(data$Date), 'mm/dd/yyyy', 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('maxDate_Asymp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(asymptomatic_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('maxDate_Asymp', 'End Date', minview = 'year', 'decades', max_date, min_date, max_date, 'M, yyyy', 'year')
+        CustomDateInput('maxDate_Asymp', 'End Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
       'Yearly' = {
         shinyjs::disable('maxDate_Asymp')
@@ -508,7 +440,6 @@ server <- function(input, output, session) {
     )
   })
   
-  # Render the plot for the data using the selected inputs
   output$plotlyAsymptomatic_C <- renderPlotly({
     req(input$minDate_Asymp, input$maxDate_Asymp, input$idCasesDateType)
     
@@ -561,7 +492,6 @@ server <- function(input, output, session) {
     plot <- plot %>% FormatY_Axis('Cases')
   })
   
-  # Render the footnote text for the plot
   output$textAsymp_C <- renderText({
     req(input$minDate_Asymp, input$maxDate_Asymp, input$idCasesDateType)
     
