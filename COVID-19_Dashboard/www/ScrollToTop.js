@@ -1,0 +1,1 @@
+$(document).ready(function () {$('#idNavbarPage a[data-toggle=\"tab\"]').on('click', function (e) {window.scrollTo(0, 0)});});
