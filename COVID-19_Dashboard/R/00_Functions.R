@@ -66,7 +66,7 @@ MakePlotlyPie <- function(df, x, y, xLabel, yLabel, colors = c(myColors$green, m
     textinfo = 'label',
     insidetextfont = list(color = '#000000', size = 15),
     marker = list(colors = colors, line = list(color = '#FFFFFF', width = 2)),
-    text = ~Cases,
+    text = ~Count,
     hoverlabel = list(align = 'left', font = myFonts$tooltip),
     hovertemplate = paste(
       '<b>', xLabel, '</b>: %{label}<br>',
@@ -133,7 +133,7 @@ CustomDateInput <- function(inputId, label, minview = "days", maxview = "decades
 GetDateData <- function(df, date_type = 'day') {
   x <- df %>%
     group_by(Date = floor_date(Date, date_type)) %>%
-    summarize(Cases=sum(Cases))
+    summarize(Count = sum(Count))
   
   return(x)
 }
@@ -142,7 +142,7 @@ GetDateLimitedData <- function(df, from, to, date_type = 'day') {
   x <- df %>%
     group_by(Date = floor_date(Date, date_type)) %>%
     filter(as.Date(Date) >= as.Date(from) & as.Date(Date) <= as.Date(to)) %>%
-    summarize(Cases=sum(Cases))
+    summarize(Count = sum(Count))
   
   return(x)
 }

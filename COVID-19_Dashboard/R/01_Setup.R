@@ -99,55 +99,37 @@ titleStrings <- {
     "asympY_C" = "Asymptomatic Cases of COVID-19 by Year Received",
     
     "ageGroup_C"  = "Confirmed Cases of COVID-19 by Age Group",
-    "ageGroupD_C" = "Confirmed Cases of COVID-19 by Age Group by Date Received",
-    "ageGroupW_C" = "Confirmed Cases of COVID-19 by Age Group by Week Received",
-    "ageGroupM_C" = "Confirmed Cases of COVID-19 by Age Group by Month Received",
-    "ageGroupY_C" = "Confirmed Cases of COVID-19 by Age Group by Year Received",
     
     "avgAge_C"  = "Average Age of Confirmed Cases of COVID-19",
-    "avgAgeD_C" = "Average Age of Confirmed Cases of COVID-19 by Date Received",
-    "avgAgeW_C" = "Average Age of Confirmed Cases of COVID-19 by Week Received",
-    "avgAgeM_C" = "Average Age of Confirmed Cases of COVID-19 by Month Received",
-    "avgAgeY_C" = "Average Age of Confirmed Cases of COVID-19 by Year Received",
     
     "gender_C"  = "Confirmed Cases of COVID-19 by Gender",
-    "genderD_C" = "Confirmed Cases of COVID-19 by Gender by Date Received",
-    "genderW_C" = "Confirmed Cases of COVID-19 by Gender by Week Received",
-    "genderM_C" = "Confirmed Cases of COVID-19 by Gender by Month Received",
-    "genderY_C" = "Confirmed Cases of COVID-19 by Gender by Year Received",
     
     "race_C"  = "Confirmed Cases of COVID-19 by Race",
-    "raceD_C" = "Confirmed Cases of COVID-19 by Race by Date Received",
-    "raceW_C" = "Confirmed Cases of COVID-19 by Race by Week Received",
-    "raceM_C" = "Confirmed Cases of COVID-19 by Race by Month Received",
-    "raceY_C" = "Confirmed Cases of COVID-19 by Race by Year Received",
     
     "ethnicity_C"     = "Confirmed Cases of COVID-19 by Ethnicity",
-    "ethnicityD_C"    = "Confirmed Cases of COVID-19 by Ethnicity by Date Received",
-    "ethnicityW_C"    = "Confirmed Cases of COVID-19 by Ethnicity by Week Received",
-    "ethnicityM_C"    = "Confirmed Cases of COVID-19 by Ethnicity by Month Received",
-    "ethnicityY_C"    = "Confirmed Cases of COVID-19 by Ethnicity by Year Received",
     
     "topZip_C"  = "Confirmed Cases of COVID-19 by Municipality",
-    "topZipD_C" = "Confirmed Cases of COVID-19 by Municipality by Date Received",
-    "topZipW_C" = "Confirmed Cases of COVID-19 by Municipality by Week Received",
-    "topZipM_C" = "Confirmed Cases of COVID-19 by Municipality by Month Received",
-    "topZipY_C" = "Confirmed Cases of COVID-19 by Municipality by Year Received",
     
     "vaccination_C"  = "Confirmed Cases of COVID-19 by Vaccination Status",
-    "vaccinationD_C" = "Confirmed Cases of COVID-19 by Vaccination Status by Date Received",
-    "vaccinationW_C" = "Confirmed Cases of COVID-19 by Vaccination Status by Week Received",
-    "vaccinationM_C" = "Confirmed Cases of COVID-19 by Vaccination Status by Month Received",
-    "vaccinationY_C" = "Confirmed Cases of COVID-19 by Vaccination Status by Year Received",
     
-    "dod_D"     = "Confirmed and Probable COVID-19 Deaths by Date of Death",
-    "gender_D"  = "Confirmed and Probable COVID-19 Deaths by Gender",
-    "race_D"    = "Confirmed and Probable COVID-19 Deaths by Race",
-    "ethn_D"    = "Confirmed and Probable COVID-19 Deaths by Ethnicity",
-    "age_gr_D"  = "Confirmed and Probable COVID-19 Deaths by Age Group",
+    "deathsD_D" = "Confirmed and Probable COVID-19 Deaths by Date of Death",
+    "deathsW_D" = "Confirmed and Probable COVID-19 Deaths by Week of Death",
+    "deathsM_D" = "Confirmed and Probable COVID-19 Deaths by Month of Death",
+    "deathsY_D" = "Confirmed and Probable COVID-19 Deaths by Year of Death",
+    
+    "ageGroup_D"  = "Confirmed and Probable COVID-19 Deaths by Age Group",
+    
     "avg_age_D" = "Average Age of Confirmed and Probable COVID-19 Deaths",
-    "vacc_D"    = "Confirmed and Probable COVID-19 Deaths by Vaccination Status",
-    "top_zip_D" = "Confirmed and Probable COVID-19 Deaths by Top Municipalities"
+    
+    "gender_D"  = "Confirmed and Probable COVID-19 Deaths by Gender",
+    
+    "race_D"    = "Confirmed and Probable COVID-19 Deaths by Race",
+    
+    "ethnicity_D"    = "Confirmed and Probable COVID-19 Deaths by Ethnicity",
+    
+    "topZip_D" = "Confirmed and Probable COVID-19 Deaths by Top Municipalities",
+    
+    "vaccination_D"    = "Confirmed and Probable COVID-19 Deaths by Vaccination Status"
   )
 }
 
