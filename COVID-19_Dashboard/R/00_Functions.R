@@ -71,7 +71,7 @@ MakePlotlyPie <- function(df, x, y, xLabel, yLabel, colors = c(myColors$green, m
     hovertemplate = paste(
       '<b>', xLabel, '</b>: %{label}<br>',
       '<b>', yLabel, '</b>: %{text}<br>',
-      '<b>Percent</b>: %{percent:2.1f}',
+      '<b>Percent</b>: %{percent:.2%}',
       '<extra></extra>',
       sep = ''
     )

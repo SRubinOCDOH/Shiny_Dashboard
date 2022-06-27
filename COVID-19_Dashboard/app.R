@@ -12,53 +12,53 @@ ui <- {
       tabPanel(
         'Cases',
         # Page display mode selector
-        fluidRow(column(width = 12, selectInput('selectedView', 'View', view_types, 'Daily'))),
+        fluidRow(column(width = 12, selectInput('Selected_Case_View', 'View', view_types, 'Daily'))),
         tags$script(src = 'DisableDateInputTyping.js'),
         # Cases
-        fluidRow(column(width = 1, align = 'center', uiOutput('startDate_Cases'), uiOutput('endDate_Cases')), column(width = 10, plotlyOutput('plotlyCases_C', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textCases_C'))),
-        tags$style(type='text/css', '#startDate_Cases { width:100%; margin-top: 150px;}'),
-        tags$style(type='text/css', '#endDate_Cases { width:100%; margin-bottom: 150px;}'),
+        fluidRow(column(width = 1, align = 'center', uiOutput('Start_Date_Cases'), uiOutput('End_Date_Cases')), column(width = 10, plotlyOutput('Plotly_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Cases'))),
+        tags$style(type='text/css', '#Start_Date_Cases { width:100%; margin-top: 150px;}'),
+        tags$style(type='text/css', '#End_Date_Cases { width:100%; margin-bottom: 150px;}'),
         # Symptomatic Cases
-        fluidRow(column(width = 1, align = 'center', uiOutput('startDate_Symp'), uiOutput('endDate_Symp')), column(width = 10, plotlyOutput('plotlySymptomatic_C', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textSymp_C'))),
-        tags$style(type='text/css', '#startDate_Symp { width:100%; margin-top: 150px;}'),
-        tags$style(type='text/css', '#endDate_Symp { width:100%; margin-bottom: 150px;}'),
+        fluidRow(column(width = 1, align = 'center', uiOutput('Start_Date_Symp'), uiOutput('End_Date_Symp')), column(width = 10, plotlyOutput('Plotly_Symptomatic_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Symptomatic_Cases'))),
+        tags$style(type='text/css', '#Start_Date_Symp { width:100%; margin-top: 150px;}'),
+        tags$style(type='text/css', '#End_Date_Symp { width:100%; margin-bottom: 150px;}'),
         # Asymptomatic Cases
-        fluidRow(column(width = 1, align = 'center', uiOutput('startDate_Asymp'), uiOutput('endDate_Asymp')), column(width = 10, plotlyOutput('plotlyAsymptomatic_C', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textAsymp_C'))),
-        tags$style(type='text/css', '#startDate_Asymp { width:100%; margin-top: 150px;}'),
-        tags$style(type='text/css', '#endDate_Asymp { width:100%; margin-bottom: 150px;}')
+        fluidRow(column(width = 1, align = 'center', uiOutput('Start_Date_Asymp'), uiOutput('End_Date_Asymp')), column(width = 10, plotlyOutput('Plotly_Asymptomatic_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Asymptomatic_Cases'))),
+        tags$style(type='text/css', '#Start_Date_Asymp { width:100%; margin-top: 150px;}'),
+        tags$style(type='text/css', '#End_Date_Asymp { width:100%; margin-bottom: 150px;}')
       ),
       # Demographics - Cases
       tabPanel(
         'Demographics',
         # Age Group - Cases
-        fluidRow(column(width = 1, radioButtons('idAgeGroup_C', 'Chart Type', plot_types, 'Bar Graph')), column(width = 10, plotlyOutput('plotlyAgeGroup_C', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textAgeGroup_C'))),
+        fluidRow(column(width = 1, radioButtons('ID_Age_Group_Cases', 'Chart Type', plot_types, 'Bar Graph')), column(width = 10, plotlyOutput('Plotly_Age_Group_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Age_Group_Cases'))),
         # Gender - Cases
-        fluidRow(column(width = 1, radioButtons('idGender_C', 'Chart Type', plot_types, 'Pie Chart')), column(width = 10, plotlyOutput('plotlyGender_C', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textGender_C'))),
+        fluidRow(column(width = 1, radioButtons('ID_Gender_Cases', 'Chart Type', plot_types, 'Pie Chart')), column(width = 10, plotlyOutput('Plotly_Gender_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Gender_Cases'))),
         # Race - Cases
-        fluidRow(column(width = 1, radioButtons('idRace_C', 'Chart Type', plot_types, 'Bar Graph')), column(width = 10, plotlyOutput('plotlyRace_C', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textRace_C'))),
+        fluidRow(column(width = 1, radioButtons('ID_Race_Cases', 'Chart Type', c("Bar Graph", "Line Graph"), 'Bar Graph')), column(width = 10, plotlyOutput('Plotly_Race_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Race_Cases'))),
         # Ethnicity - Cases
-        fluidRow(column(width = 1, radioButtons('idEthnicity_C', 'Chart Type', plot_types, 'Pie Chart')), column(width = 10, plotlyOutput('plotlyEthnicity_C', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textEthnicity_C')))
+        fluidRow(column(width = 1, radioButtons('ID_Ethnicity_Cases', 'Chart Type', plot_types, 'Pie Chart')), column(width = 10, plotlyOutput('Plotly_Ethnicity_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Ethnicity_Cases')))
       ),
       # Municipalities - Cases
       tabPanel(
         'Municipalities',
-        fluidRow(column(width = 12, sliderInput('idTopZipCodes_C', 'Towns to Display (5 to 20)', min = 5, max = 20, value = 10)), column(width = 10, offset = 1, plotlyOutput('plotlyTopZipCodes_C', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textTipZipCodes_C'))),
-        fluidRow(column(width = 12, selectInput('idZipCodes_C', 'Town to Display', sort(dataValidation$zipCodes$Town.City), 'Goshen')), column(width = 10, offset = 1, plotlyOutput('plotlyZipCodes_C', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textZipCodes_C')))
+        fluidRow(column(width = 12, sliderInput('ID_Top_Zip_Codes_Cases', 'Towns to Display (5 to 20)', min = 5, max = 20, value = 10)), column(width = 10, offset = 1, plotlyOutput('Plotly_Top_Zip_Codes_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Top_Zip_Codes_Cases'))),
+        fluidRow(column(width = 12, selectInput('ID_Zip_Codes_Cases', 'Town to Display', sort(dataValidation$zipCodes$Town.City), 'Goshen')), column(width = 10, offset = 1, plotlyOutput('Plotly_Zip_Codes_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Zip_Codes_Cases')))
       ),
       # Vaccination - Cases
       tabPanel(
         'Vaccinations',
-        fluidRow(column(width = 1, radioButtons('vaccination_C_ID', 'Chart Type', plot_types, 'Bar Graph')), column(width = 10, plotlyOutput('vaccination_C_Plotly', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('vaccination_C_Text')))
+        fluidRow(column(width = 1, radioButtons('ID_Vaccination_Cases', 'Chart Type', plot_types, 'Bar Graph')), column(width = 10, plotlyOutput('Plotly_Vaccination_Cases', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Vaccination_Cases')))
       )
     ),
     navbarMenu(
@@ -66,68 +66,68 @@ ui <- {
       tabPanel(
         'Deaths',
         # Page display mode selector
-        fluidRow(column(width = 12, selectInput('deathView', 'View', view_types, 'Daily'))),
-        fluidRow(column(width = 1, align = 'center', uiOutput('startDate_Deaths'), uiOutput('endDate_Deaths')), column(width = 10, plotlyOutput('plotlyDeaths_D', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textDeaths_D'))),
-        tags$style(type='text/css', '#startDate_Deaths { width:100%; margin-top: 150px;}'),
-        tags$style(type='text/css', '#endDate_Deaths { width:100%; margin-bottom: 150px;}')
+        fluidRow(column(width = 12, selectInput('Selected_Death_View', 'View', view_types, 'Daily'))),
+        fluidRow(column(width = 1, align = 'center', uiOutput('Start_Date_Deaths'), uiOutput('End_Date_Deaths')), column(width = 10, plotlyOutput('Plotly_Deaths', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Deaths'))),
+        tags$style(type='text/css', '#Start_Date_Deaths { width:100%; margin-top: 150px;}'),
+        tags$style(type='text/css', '#End_Date_Deaths { width:100%; margin-bottom: 150px;}')
       ),
       # Demographics - Deaths
       tabPanel(
         'Demographics',
         # Age Group - Deaths
-        fluidRow(column(width = 1, radioButtons('idAgeGroup_D', 'Chart Type', plot_types, 'Bar Graph')), column(width = 10, plotlyOutput('plotlyAgeGroup_D', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textAgeGroup_D'))),
+        fluidRow(column(width = 1, radioButtons('ID_Age_Group_Deaths', 'Chart Type', c("Bar Graph", "Line Graph"), 'Bar Graph')), column(width = 10, plotlyOutput('Plotly_Age_Group_Deaths', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Age_Group_Deaths'))),
         # Gender - Deaths
-        fluidRow(column(width = 1, radioButtons('idGender_D', 'Chart Type', plot_types, 'Pie Chart')), column(width = 10, plotlyOutput('plotlyGender_D', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textGender_D'))),
+        fluidRow(column(width = 1, radioButtons('ID_Gender_Deaths', 'Chart Type', plot_types, 'Pie Chart')), column(width = 10, plotlyOutput('Plotly_Gender_Deaths', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Gender_Deaths'))),
         # Race - Deaths
-        fluidRow(column(width = 1, radioButtons('idRace_D', 'Chart Type', plot_types, 'Bar Graph')), column(width = 10, plotlyOutput('plotlyRace_D', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textRace_D'))),
+        fluidRow(column(width = 1, radioButtons('ID_Race_Deaths', 'Chart Type', c("Bar Graph", "Line Graph"), 'Bar Graph')), column(width = 10, plotlyOutput('Plotly_Race_Deaths', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Race_Deaths'))),
         # Ethnicity - Deaths
-        fluidRow(column(width = 1, radioButtons('idEthnicity_D', 'Chart Type', plot_types, 'Pie Chart')), column(width = 10, plotlyOutput('plotlyEthnicity_D', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textEthnicity_D')))
+        fluidRow(column(width = 1, radioButtons('ID_Ethnicity_Deaths', 'Chart Type', plot_types, 'Pie Chart')), column(width = 10, plotlyOutput('Plotly_Ethnicity_Deaths', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Ethnicity_Deaths')))
       ),
       # Municipalities - Deaths
       tabPanel(
         'Municipalities',
-        fluidRow(column(width = 12, sliderInput('idTopZipCodes_D', 'Towns to Display (5 to 20)', min = 5, max = 20, value = 10)), column(width = 10, offset = 1, plotlyOutput('plotlyTopZipCodes_D', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textTipZipCodes_D'))),
-        fluidRow(column(width = 12, selectInput('idZipCodes_D', 'Town to Display', sort(dataValidation$zipCodes$Town.City), 'Goshen')), column(width = 10, offset = 1, plotlyOutput('plotlyZipCodes_D', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('textZipCodes_D')))
+        fluidRow(column(width = 12, sliderInput('ID_Top_Zip_Codes_Deaths', 'Towns to Display (5 to 20)', min = 5, max = 20, value = 10)), column(width = 10, offset = 1, plotlyOutput('Plotly_Top_Zip_Codes_Deaths', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Top_Zip_Codes_Deaths'))),
+        fluidRow(column(width = 12, selectInput('ID_Zip_Codes_Deaths', 'Town to Display', sort(dataValidation$zipCodes$Town.City), 'Goshen')), column(width = 10, offset = 1, plotlyOutput('Plotly_Zip_Codes_Deaths', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Zip_Codes_Deaths')))
       ),
       # Vaccination - Deaths
       tabPanel(
         'Vaccinations',
-        fluidRow(column(width = 1, radioButtons('vaccination_D_ID', 'Chart Type', plot_types, 'Bar Graph')), column(width = 10, plotlyOutput('vaccination_D_Plotly', height = '500px'))),
-        fluidRow(column(width = 10, offset = 1, htmlOutput('vaccination_D_Text')))
+        fluidRow(column(width = 1, radioButtons('ID_Vaccination_Deaths', 'Chart Type', plot_types, 'Bar Graph')), column(width = 10, plotlyOutput('Plotly_Vaccination_Deaths', height = '500px'))),
+        fluidRow(column(width = 10, offset = 1, htmlOutput('Text_Vaccination_Deaths')))
       )
     )
   )
 }
 
 server <- function(input, output, session) {
-  observeEvent(input$idNavbarPage, updateNavbarPage(session, 'selectedView', 'Daily'))
+  observeEvent(input$idNavbarPage, updateNavbarPage(session, 'Selected_Case_View', 'Daily'))
   
   dateData <- reactive({
-    req(input$selectedView, input$startDate_Cases, input$endDate_Cases, input$startDate_Symp, input$endDate_Symp, input$startDate_Asymp, input$endDate_Asymp)
+    req(input$Selected_Case_View, input$Start_Date_Cases, input$End_Date_Cases, input$Start_Date_Symp, input$End_Date_Symp, input$Start_Date_Asymp, input$End_Date_Asymp)
     
     switch (
-      input$selectedView,
+      input$Selected_Case_View,
       'Daily'   = {
-        cases <- GetDateLimitedData(cases_C, input$startDate_Cases, input$endDate_Cases, 'day')
-        symp  <- GetDateLimitedData(symptomatic_C, input$startDate_Symp, input$endDate_Symp, 'day')
-        asymp <- GetDateLimitedData(asymptomatic_C, input$startDate_Asymp, input$endDate_Asymp, 'day')
+        cases <- GetDateLimitedData(cases_C, input$Start_Date_Cases, input$End_Date_Cases, 'day')
+        symp  <- GetDateLimitedData(symptomatic_C, input$Start_Date_Symp, input$End_Date_Symp, 'day')
+        asymp <- GetDateLimitedData(asymptomatic_C, input$Start_Date_Asymp, input$End_Date_Asymp, 'day')
       },
       'Weekly'  = {
-        cases <- GetDateLimitedData(cases_C, input$startDate_Cases, input$endDate_Cases, 'week')
-        symp  <- GetDateLimitedData(symptomatic_C, input$startDate_Symp, input$endDate_Symp, 'week')
-        asymp <- GetDateLimitedData(asymptomatic_C, input$startDate_Asymp, input$endDate_Asymp, 'week')
+        cases <- GetDateLimitedData(cases_C, input$Start_Date_Cases, input$End_Date_Cases, 'week')
+        symp  <- GetDateLimitedData(symptomatic_C, input$Start_Date_Symp, input$End_Date_Symp, 'week')
+        asymp <- GetDateLimitedData(asymptomatic_C, input$Start_Date_Asymp, input$End_Date_Asymp, 'week')
       },
       'Monthly' = {
-        cases <- GetDateLimitedData(cases_C, input$startDate_Cases, input$endDate_Cases, 'month')
-        symp  <- GetDateLimitedData(symptomatic_C, input$startDate_Symp, input$endDate_Symp, 'month')
-        asymp <- GetDateLimitedData(asymptomatic_C, input$startDate_Asymp, input$endDate_Asymp, 'month')
+        cases <- GetDateLimitedData(cases_C, input$Start_Date_Cases, input$End_Date_Cases, 'month')
+        symp  <- GetDateLimitedData(symptomatic_C, input$Start_Date_Symp, input$End_Date_Symp, 'month')
+        asymp <- GetDateLimitedData(asymptomatic_C, input$Start_Date_Asymp, input$End_Date_Asymp, 'month')
       },
       'Yearly'  = {
         cases <- GetDateData(cases_C, 'year')
@@ -135,81 +135,81 @@ server <- function(input, output, session) {
         asymp <- GetDateData(asymptomatic_C, 'year')
       }
     )
-    list(cases=cases, symp=symp, asymp=asymp, iselview=input$selectedView)
+    list(cases=cases, symp=symp, asymp=asymp, iselview=input$Selected_Case_View)
   })
   
   data_db <- debounce(dateData, millis = 300)
   
   # Cases ----------------------------------------------------------------------
-  observeEvent(input$startDate_Cases, {
+  observeEvent(input$Start_Date_Cases, {
     switch(
-      input$selectedView,
-      'Daily' = updateDateInput(session, 'endDate_Cases', min = input$startDate_Cases + 6),
-      'Weekly' = updateDateInput(session, 'endDate_Cases', min = input$startDate_Cases + 34),
-      'Monthly' = updateDateInput(session, 'endDate_Cases', min = input$startDate_Cases %m+% months(5))
+      input$Selected_Case_View,
+      'Daily' = updateDateInput(session, 'End_Date_Cases', min = input$Start_Date_Cases + 6),
+      'Weekly' = updateDateInput(session, 'End_Date_Cases', min = input$Start_Date_Cases + 34),
+      'Monthly' = updateDateInput(session, 'End_Date_Cases', min = input$Start_Date_Cases %m+% months(5))
     )
   })
-  observeEvent(input$endDate_Cases, {
+  observeEvent(input$End_Date_Cases, {
     switch(
-      input$selectedView,
-      'Daily' = updateDateInput(session, 'startDate_Cases', max = input$endDate_Cases - 6),
-      'Weekly' = updateDateInput(session, 'startDate_Cases', max = input$endDate_Cases - 34),
-      'Monthly' = updateDateInput(session, 'startDate_Cases', max = input$endDate_Cases %m-% months(5))
+      input$Selected_Case_View,
+      'Daily' = updateDateInput(session, 'Start_Date_Cases', max = input$End_Date_Cases - 6),
+      'Weekly' = updateDateInput(session, 'Start_Date_Cases', max = input$End_Date_Cases - 34),
+      'Monthly' = updateDateInput(session, 'Start_Date_Cases', max = input$End_Date_Cases %m-% months(5))
     )
   })
 
-  output$startDate_Cases <- renderUI({
-    req(input$selectedView)
+  output$Start_Date_Cases <- renderUI({
+    req(input$Selected_Case_View)
     switch (
-      input$selectedView,
+      input$Selected_Case_View,
       'Daily' = {
         data <- GetDateData(cases_C, 'day')
-        dateInput('startDate_Cases', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
+        dateInput('Start_Date_Cases', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(cases_C, 'week')
-        dateInput('startDate_Cases', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('Start_Date_Cases', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(cases_C, 'month')
         min_date <- min(floor_date(data$Date, 'month'))
         max_date <- max(ceiling_date(data$Date, 'month')) - 1
-        CustomDateInput('startDate_Cases', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
+        CustomDateInput('Start_Date_Cases', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
       'Yearly' = {
         data <- GetDateData(cases_C, 'year')
-        dateInput('startDate_Cases', 'Start Date', value = min(data$Date))
-        shinyjs::disable('startDate_Cases')
+        dateInput('Start_Date_Cases', 'Start Date', value = min(data$Date))
+        shinyjs::disable('Start_Date_Cases')
       }
     )
   })
-  output$endDate_Cases <- renderUI({
-    req(input$selectedView)
+  output$End_Date_Cases <- renderUI({
+    req(input$Selected_Case_View)
     switch (
-      input$selectedView,
+      input$Selected_Case_View,
       'Daily' = {
         data <- GetDateData(cases_C, 'day')
-        dateInput('endDate_Cases', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
+        dateInput('End_Date_Cases', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(cases_C, 'week')
-        dateInput('endDate_Cases', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('End_Date_Cases', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(cases_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('endDate_Cases', 'End Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
+        CustomDateInput('End_Date_Cases', 'End Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
       'Yearly' = {
         data <- GetDateData(cases_C, 'year')
-        dateInput('endDate_Cases', 'Start Date', value = min(data$Date))
-        shinyjs::disable('startDate_Cases')
+        dateInput('End_Date_Cases', 'Start Date', value = min(data$Date))
+        shinyjs::disable('Start_Date_Cases')
       }
     )
   })
   
-  output$plotlyCases_C <- renderPlotly({
+  output$Plotly_Cases <- renderPlotly({
     temp <- req(data_db())
     data <- temp$cases
     iselview <- temp$iselview
@@ -256,7 +256,7 @@ server <- function(input, output, session) {
     plot <- plot %>% FormatY_Axis('Cases')
   })
   
-  output$textCases_C <- renderText({
+  output$Text_Cases <- renderText({
     temp <- req(data_db())
     data <- temp$cases
     
@@ -287,68 +287,68 @@ server <- function(input, output, session) {
   })
   
   # Symptomatic Cases ----------------------------------------------------------
-  observeEvent(input$startDate_Symp, {
+  observeEvent(input$Start_Date_Symp, {
     switch(
-      input$selectedView,
-      'Daily' = updateDateInput(session, 'endDate_Symp', min = input$startDate_Symp + 6),
-      'Weekly' = updateDateInput(session, 'endDate_Symp', min = input$startDate_Symp + 34),
-      'Monthly' = updateDateInput(session, 'endDate_Symp', min = input$startDate_Symp %m+% months(5))
+      input$Selected_Case_View,
+      'Daily' = updateDateInput(session, 'End_Date_Symp', min = input$Start_Date_Symp + 6),
+      'Weekly' = updateDateInput(session, 'End_Date_Symp', min = input$Start_Date_Symp + 34),
+      'Monthly' = updateDateInput(session, 'End_Date_Symp', min = input$Start_Date_Symp %m+% months(5))
     )
   })
-  observeEvent(input$endDate_Symp, {
+  observeEvent(input$End_Date_Symp, {
     switch(
-      input$selectedView,
-      'Daily' = updateDateInput(session, 'startDate_Symp', max = input$endDate_Symp - 6),
-      'Weekly' = updateDateInput(session, 'startDate_Symp', max = input$endDate_Symp - 34),
-      'Monthly' = updateDateInput(session, 'startDate_Symp', max = input$endDate_Symp %m-% months(5))
+      input$Selected_Case_View,
+      'Daily' = updateDateInput(session, 'Start_Date_Symp', max = input$End_Date_Symp - 6),
+      'Weekly' = updateDateInput(session, 'Start_Date_Symp', max = input$End_Date_Symp - 34),
+      'Monthly' = updateDateInput(session, 'Start_Date_Symp', max = input$End_Date_Symp %m-% months(5))
     )
   })
   
-  output$startDate_Symp <- renderUI({
-    req(input$selectedView)
+  output$Start_Date_Symp <- renderUI({
+    req(input$Selected_Case_View)
     switch (
-      input$selectedView,
+      input$Selected_Case_View,
       'Daily' = {
         data <- GetDateData(symptomatic_C, 'day')
-        dateInput('startDate_Symp', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
+        dateInput('Start_Date_Symp', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(symptomatic_C, 'week')
-        dateInput('startDate_Symp', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('Start_Date_Symp', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(symptomatic_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('startDate_Symp', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
+        CustomDateInput('Start_Date_Symp', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
-      'Yearly' = shinyjs::disable('startDate_Symp')
+      'Yearly' = shinyjs::disable('Start_Date_Symp')
     )
   })
-  output$endDate_Symp <- renderUI({
-    req(input$selectedView)
+  output$End_Date_Symp <- renderUI({
+    req(input$Selected_Case_View)
     
     switch (
-      input$selectedView,
+      input$Selected_Case_View,
       'Daily' = {
         data <- GetDateData(symptomatic_C, 'day')
-        dateInput('endDate_Symp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
+        dateInput('End_Date_Symp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(symptomatic_C, 'week')
-        dateInput('endDate_Symp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('End_Date_Symp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(symptomatic_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('endDate_Symp', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
+        CustomDateInput('End_Date_Symp', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
-      'Yearly' = shinyjs::disable('endDate_Symp')
+      'Yearly' = shinyjs::disable('End_Date_Symp')
     )
   })
   
-  output$plotlySymptomatic_C <- renderPlotly({
+  output$Plotly_Symptomatic_Cases <- renderPlotly({
     temp <- req(data_db())
     data <- temp$symp
     iselview <- temp$iselview
@@ -394,24 +394,24 @@ server <- function(input, output, session) {
     plot <- plot %>% FormatY_Axis('Cases')
   })
   
-  output$textSymp_C <- renderText({
+  output$Text_Symptomatic_Cases <- renderText({
     temp <- req(data_db())
     data <- temp$symp
     
     switch (
       temp$iselview,
       'Daily'   = {
-        data <- GetDateLimitedData(symptomatic_C, input$startDate_Symp, input$endDate_Symp, 'day')
+        data <- GetDateLimitedData(symptomatic_C, input$Start_Date_Symp, input$End_Date_Symp, 'day')
         min_date <- format(min(floor_date(data$Date, 'day')), '%B %d, %Y')
         max_date <- format(max(ceiling_date(data$Date, 'day')) - 1, '%B %d, %Y')
       },
       'Weekly'  = {
-        data <- GetDateLimitedData(symptomatic_C, input$startDate_Symp, input$endDate_Symp, 'week')
+        data <- GetDateLimitedData(symptomatic_C, input$Start_Date_Symp, input$End_Date_Symp, 'week')
         min_date <- format(min(floor_date(data$Date, 'week')), '%B %d, %Y')
         max_date <- format(max(ceiling_date(data$Date, 'week')) - 7, '%B %d, %Y')
       },
       'Monthly' = {
-        data <- GetDateLimitedData(symptomatic_C, input$startDate_Symp, input$endDate_Symp, 'month')
+        data <- GetDateLimitedData(symptomatic_C, input$Start_Date_Symp, input$End_Date_Symp, 'month')
         min_date <- format(min(floor_date(data$Date, 'month')), '%B, %Y')
         max_date <- format(max(ceiling_date(data$Date, 'month')) - 1, '%B, %Y')
       },
@@ -430,73 +430,73 @@ server <- function(input, output, session) {
   })
   
   # Asymptomatic Cases ---------------------------------------------------------
-  observeEvent(input$startDate_Asymp, {
+  observeEvent(input$Start_Date_Asymp, {
     switch(
-      input$selectedView,
-      'Daily' = updateDateInput(session, 'endDate_Asymp', min = input$startDate_Asymp + 6),
-      'Weekly' = updateDateInput(session, 'endDate_Asymp', min = input$startDate_Asymp + 34),
-      'Monthly' = updateDateInput(session, 'endDate_Asymp', min = input$startDate_Asymp %m+% months(5))
+      input$Selected_Case_View,
+      'Daily' = updateDateInput(session, 'End_Date_Asymp', min = input$Start_Date_Asymp + 6),
+      'Weekly' = updateDateInput(session, 'End_Date_Asymp', min = input$Start_Date_Asymp + 34),
+      'Monthly' = updateDateInput(session, 'End_Date_Asymp', min = input$Start_Date_Asymp %m+% months(5))
     )
   })
-  observeEvent(input$endDate_Asymp, {
+  observeEvent(input$End_Date_Asymp, {
     switch(
-      input$selectedView,
-      'Daily' = updateDateInput(session, 'startDate_Asymp', max = input$endDate_Asymp - 6),
-      'Weekly' = updateDateInput(session, 'startDate_Asymp', max = input$endDate_Asymp - 34),
-      'Monthly' = updateDateInput(session, 'startDate_Asymp', max = input$endDate_Asymp %m-% months(5))
+      input$Selected_Case_View,
+      'Daily' = updateDateInput(session, 'Start_Date_Asymp', max = input$End_Date_Asymp - 6),
+      'Weekly' = updateDateInput(session, 'Start_Date_Asymp', max = input$End_Date_Asymp - 34),
+      'Monthly' = updateDateInput(session, 'Start_Date_Asymp', max = input$End_Date_Asymp %m-% months(5))
     )
   })
   
-  output$startDate_Asymp <- renderUI({
-    req(input$selectedView)
+  output$Start_Date_Asymp <- renderUI({
+    req(input$Selected_Case_View)
     
     switch (
-      input$selectedView,
+      input$Selected_Case_View,
       'Daily' = {
         data <- GetDateData(asymptomatic_C, 'day')
-        dateInput('startDate_Asymp', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
+        dateInput('Start_Date_Asymp', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(asymptomatic_C, 'week')
-        dateInput('startDate_Asymp', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('Start_Date_Asymp', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(asymptomatic_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('startDate_Asymp', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
+        CustomDateInput('Start_Date_Asymp', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
       'Yearly' = {
-        shinyjs::disable('startDate_Asymp')
+        shinyjs::disable('Start_Date_Asymp')
       }
     )
   })
-  output$endDate_Asymp <- renderUI({
-    req(input$selectedView)
+  output$End_Date_Asymp <- renderUI({
+    req(input$Selected_Case_View)
     
     switch (
-      input$selectedView,
+      input$Selected_Case_View,
       'Daily' = {
         data <- GetDateData(asymptomatic_C, 'day')
-        dateInput('endDate_Asymp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
+        dateInput('End_Date_Asymp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(asymptomatic_C, 'week')
-        dateInput('endDate_Asymp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('End_Date_Asymp', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(asymptomatic_C, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('endDate_Asymp', 'End Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
+        CustomDateInput('End_Date_Asymp', 'End Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
       'Yearly' = {
-        shinyjs::disable('endDate_Asymp')
+        shinyjs::disable('End_Date_Asymp')
       }
     )
   })
   
-  output$plotlyAsymptomatic_C <- renderPlotly({
+  output$Plotly_Asymptomatic_Cases <- renderPlotly({
     temp <- req(data_db())
     data <- temp$asymp
     iselview <- temp$iselview
@@ -540,24 +540,24 @@ server <- function(input, output, session) {
     plot <- plot %>% FormatY_Axis('Cases')
   })
   
-  output$textAsymp_C <- renderText({
+  output$Text_Asymptomatic_Cases <- renderText({
     temp <- req(data_db())
     data <- temp$asymp
     
     switch (
       temp$iselview,
       'Daily'   = {
-        data <- GetDateLimitedData(asymptomatic_C, input$startDate_Asymp, input$endDate_Asymp, 'day')
+        data <- GetDateLimitedData(asymptomatic_C, input$Start_Date_Asymp, input$End_Date_Asymp, 'day')
         min_date <- format(min(floor_date(data$Date, 'day')), '%B %d, %Y')
         max_date <- format(max(ceiling_date(data$Date, 'day')) - 1, '%B %d, %Y')
       },
       'Weekly'  = {
-        data <- GetDateLimitedData(asymptomatic_C, input$startDate_Asymp, input$endDate_Asymp, 'week')
+        data <- GetDateLimitedData(asymptomatic_C, input$Start_Date_Asymp, input$End_Date_Asymp, 'week')
         min_date <- format(min(floor_date(data$Date, 'week')), '%B %d, %Y')
         max_date <- format(max(ceiling_date(data$Date, 'week')) - 7, '%B %d, %Y')
       },
       'Monthly' = {
-        data <- GetDateLimitedData(asymptomatic_C, input$startDate_Asymp, input$endDate_Asymp, 'month')
+        data <- GetDateLimitedData(asymptomatic_C, input$Start_Date_Asymp, input$End_Date_Asymp, 'month')
         min_date <- format(min(floor_date(data$Date, 'month')), '%B, %Y')
         max_date <- format(max(ceiling_date(data$Date, 'month')) - 1, '%B, %Y')
       },
@@ -575,7 +575,7 @@ server <- function(input, output, session) {
   })
   
   # Age Group ------------------------------------------------------------------
-  output$plotlyAgeGroup_C <- renderPlotly({
+  output$Plotly_Age_Group_Cases <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(cases_C$Count), sum(ageGroup_C$Count), titleStrings$ageGroup_C)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(ageGroup_C$Count), big.mark = ','), ')', sep = '')
@@ -583,7 +583,7 @@ server <- function(input, output, session) {
     colors <- c(myColors$green, myColors$purple, myColors$orange, myColors$red, myColors$blue)
     
     # Create the chart based on user input
-    switch (input$idAgeGroup_C,
+    switch (input$ID_Age_Group_Cases,
       'Bar Graph' = {
         data <- group_by(ageGroup_C, Age.Group) %>% summarise(Count = sum(Count))
         
@@ -616,7 +616,7 @@ server <- function(input, output, session) {
     plot <- plot %>% SetTitle(first_line, second_line)
   })
   
-  output$textAgeGroup_C <- renderText({
+  output$Text_Age_Group_Cases <- renderText({
     percentages <- GetPercent(ageGroup_C, ageGroup_C$Age.Group, ageGroup_C$Count, dataValidation$ageGroup)
     
     paste(
@@ -627,7 +627,7 @@ server <- function(input, output, session) {
   })
   
   # Gender ---------------------------------------------------------------------
-  output$plotlyGender_C <- renderPlotly({
+  output$Plotly_Gender_Cases <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(cases_C$Count), sum(gender_C$Count), titleStrings$gender_C)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(gender_C$Count), big.mark = ','), ')', sep = '')
@@ -636,7 +636,7 @@ server <- function(input, output, session) {
     
     # Create the chart based on user input
     switch (
-      input$idGender_C,
+      input$ID_Gender_Cases,
       'Bar Graph' = {
         data <- group_by(gender_C, Gender) %>% summarise(Count = sum(Count))
         
@@ -674,14 +674,14 @@ server <- function(input, output, session) {
     plot <- plot %>% SetTitle(first_line, second_line)
   })
   
-  output$textGender_C <- renderText({
+  output$Text_Gender_Cases <- renderText({
     paste(
       '<br><b>Note: Gender is self-reported field. Missing or Unknown when laboratory reporting did not provide this information and 
       case has not been reached yet (n=', format(sum(cases_C$Count) - sum(gender_C$Count), big.mark = ','), ').</b><br><br>', sep = '')
   })
   
   # Race -----------------------------------------------------------------------
-  output$plotlyRace_C <- renderPlotly({
+  output$Plotly_Race_Cases <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(cases_C$Count), sum(race_C$Count), titleStrings$race_C)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(race_C$Count), big.mark = ','), ')', sep = '')
@@ -690,7 +690,7 @@ server <- function(input, output, session) {
     
     # Create the chart based on user input
     switch (
-      input$idRace_C,
+      input$ID_Race_Cases,
       'Bar Graph' = {
         data <- group_by(race_C, Race) %>% summarise(Count = sum(Count))
         data$Race[data$Race == 'Asian/Native Hawaiian/Other Pacific Islander'] = 'Asian/\nNative Hawaiian/\nOther Pacific Islander'
@@ -699,14 +699,6 @@ server <- function(input, output, session) {
         plot <- MakePlotlyBar(data, data$Race, data$Count, colors) %>%
           FormatX_Axis('Race', 'total descending') %>%
           FormatY_Axis('Cases')
-      },
-      'Pie Chart' = {
-        data <- group_by(race_C, Race) %>% summarise(Count = sum(Count))
-        data$Race[data$Race == 'Asian/Native Hawaiian/Other Pacific Islander'] = 'Asian/\nNative Hawaiian/\nOther Pacific Islander'
-        data$Race[data$Race == 'Native American/Alaska Native'] = 'Native American/\nAlaska Native'
-        
-        plot <- MakePlotlyPie(data, data$Race, data$Count, 'Race', 'Cases', colors) %>%
-          layout(legend = list(x = .9, y = .5))
       },
       'Line Graph' = {
         data <- race_C %>% pivot_wider(names_from = Race, values_from = Count) %>%
@@ -719,31 +711,11 @@ server <- function(input, output, session) {
         plot <- data %>%
           # Create the graph with just the x-axis, no data on the graph
           plot_ly(x = ~ Date, hovertemplate = paste('<b>%{y}</b>')) %>%
-          # Add trace for Asian
-          add_trace(
-            y = ~Asian, legendgroup = names[1], name = names[1],
-            type = 'scatter', mode = 'lines', line = list(color = colors[1]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[1], '</b>:', format(data$Asian, big.mark = ','))) %>%
-          # Add trace for Black
-          add_trace(
-            y = ~Black, legendgroup = names[2], name = names[2],
-            type = 'scatter', mode = 'lines', line = list(color = colors[2]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[2], '</b>:', format(data$Black, big.mark = ','))) %>%
-          # Add trace for Native
-          add_trace(
-            y = ~Native, legendgroup = names[3], name = names[3],
-            type = 'scatter', mode = 'lines', line = list(color = colors[3]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[3], '</b>:', format(data$Native, big.mark = ','))) %>%
-          # Add trace for Other
-          add_trace(
-            y = ~Other, legendgroup = names[4], name = names[4],
-            type = 'scatter', mode = 'lines', line = list(color = colors[4]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[4], '</b>:', format(data$Other, big.mark = ','))) %>%
-          # Add trace for White
-          add_trace(
-            y = ~White, legendgroup = names[5], name = names[5],
-            type = 'scatter', mode = 'lines', line = list(color = colors[5]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[5], '</b>:', format(data$White, big.mark = ',')))
+          add_trace(y = ~Asian,  legendgroup = names[1], name = names[1], type = 'scatter', mode = 'lines', line = list(color = colors[1]), hoverinfo = 'text', hovertext = paste('<b>', names[1], '</b>:', format(data$Asian, big.mark = ','))) %>%
+          add_trace(y = ~Black,  legendgroup = names[2], name = names[2], type = 'scatter', mode = 'lines', line = list(color = colors[2]), hoverinfo = 'text', hovertext = paste('<b>', names[2], '</b>:', format(data$Black, big.mark = ','))) %>%
+          add_trace(y = ~Native, legendgroup = names[3], name = names[3], type = 'scatter', mode = 'lines', line = list(color = colors[3]), hoverinfo = 'text', hovertext = paste('<b>', names[3], '</b>:', format(data$Native, big.mark = ','))) %>%
+          add_trace(y = ~Other,  legendgroup = names[4], name = names[4], type = 'scatter', mode = 'lines', line = list(color = colors[4]), hoverinfo = 'text', hovertext = paste('<b>', names[4], '</b>:', format(data$Other, big.mark = ','))) %>%
+          add_trace(y = ~White,  legendgroup = names[5], name = names[5], type = 'scatter', mode = 'lines', line = list(color = colors[5]), hoverinfo = 'text', hovertext = paste('<b>', names[5], '</b>:', format(data$White, big.mark = ',')))
         
         
         data$MaxCases <- pmax(data$White, data$Black, data$Native, data$Asian, data$Other)
@@ -761,7 +733,7 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10))
   })
   
-  output$textRace_C <- renderText({
+  output$Text_Race_Cases <- renderText({
     percentages <- GetPercent(race_C, race_C$Race, race_C$Count, dataValidation$race)
     
     paste(
@@ -773,7 +745,7 @@ server <- function(input, output, session) {
   })
   
   # Ethnicity ------------------------------------------------------------------
-  output$plotlyEthnicity_C <- renderPlotly({
+  output$Plotly_Ethnicity_Cases <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(cases_C$Count), sum(ethnicity_C$Count), titleStrings$ethnicity_C)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(ethnicity_C$Count), big.mark = ','), ')', sep = '')
@@ -782,7 +754,7 @@ server <- function(input, output, session) {
     
     # Create the chart based on user input
     switch (
-      input$idEthnicity_C,
+      input$ID_Ethnicity_Cases,
       'Bar Graph' = {
         data <- group_by(ethnicity_C, Ethnicity) %>% summarise(Count = sum(Count))
         
@@ -840,7 +812,7 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10))
   })
   
-  output$textEthnicity_C <- renderText({
+  output$Text_Ethnicity_Cases <- renderText({
     paste(
       '<br><b>Note: Ethnicity is largely self-reported data and are identified through case investigation. 
       Data are incomplete due to delays in reporting, data entry, unknown, or undetermined risk factors and persons lost 
@@ -848,13 +820,13 @@ server <- function(input, output, session) {
   })
   
   # Top Zip Codes --------------------------------------------------------------
-  output$plotlyTopZipCodes_C <- renderPlotly({
-    req(input$idTopZipCodes_C)
+  output$Plotly_Top_Zip_Codes_Cases <- renderPlotly({
+    req(input$ID_Top_Zip_Codes_Cases)
     
     # Create the strings for the title
-    data <- topZipCodes_C %>% slice_head(n = input$idTopZipCodes_C)
+    data <- topZipCodes_C %>% slice_head(n = input$ID_Top_Zip_Codes_Cases)
     
-    first_line <- paste(titleStrings$topZip_C, ' (Top ', input$idTopZipCodes_C, ')', sep = '')
+    first_line <- paste(titleStrings$topZip_C, ' (Top ', input$ID_Top_Zip_Codes_Cases, ')', sep = '')
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(data$Count), big.mark = ','), ')', sep = '')
     
     colors <- c(myColors$green, myColors$purple, myColors$orange, myColors$red, myColors$blue, myColors$yellow, myColors$lblue, myColors$dgreen,
@@ -890,25 +862,25 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10))
   })
   
-  output$textTipZipCodes_C <- renderText({
+  output$Text_Top_Zip_Codes_Cases <- renderText({
     paste(
-      '<br><b>Note: Data are incomplete due to ongoing case investigation. ', str_to_title(as.english(input$idTopZipCodes_C)), 
-      ' most reported zip codes represented in graph (n=', format(sum(top_n(topZipCodes_C, input$idTopZipCodes_C, Count)$Count), big.mark = ','), 
-      ') representing ', sprintf('%0.1f%%', sum(top_n(topZipCodes_C, input$idTopZipCodes_C, Count)$Count) / sum(cases_C$Count) * 100), ' of cases.</b><br><br>', sep = ''
+      '<br><b>Note: Data are incomplete due to ongoing case investigation. ', str_to_title(as.english(input$ID_Top_Zip_Codes_Cases)), 
+      ' most reported zip codes represented in graph (n=', format(sum(top_n(topZipCodes_C, input$ID_Top_Zip_Codes_Cases, Count)$Count), big.mark = ','), 
+      ') representing ', sprintf('%0.1f%%', sum(top_n(topZipCodes_C, input$ID_Top_Zip_Codes_Cases, Count)$Count) / sum(cases_C$Count) * 100), ' of cases.</b><br><br>', sep = ''
     )
   })
   
   # Zip Codes by Date ----------------------------------------------------------
-  output$plotlyZipCodes_C <- renderPlotly({
-    req(input$idZipCodes_C)
+  output$Plotly_Zip_Codes_Cases <- renderPlotly({
+    req(input$ID_Zip_Codes_Cases)
     
     # Filter the data to the town/city selected by the user
-    data <- filter(zip_daily_C, Town.City == input$idZipCodes_C)
+    data <- filter(zip_daily_C, Town.City == input$ID_Zip_Codes_Cases)
     data <- data[order(data$Date, decreasing = FALSE), ]
     
     # Create string for the title
     first_line <- 'Confirmed Cases of COVID-19'
-    second_line <- paste(input$idZipCodes_C, ', NY - As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(data$Count), big.mark = ','), ')', sep = '')
+    second_line <- paste(input$ID_Zip_Codes_Cases, ', NY - As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(data$Count), big.mark = ','), ')', sep = '')
     
     plot <- MakePlotlyLine(data, data$Date, data$Count, myColors$blue)
     
@@ -921,21 +893,21 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10), hovermode = 'x')
   })
   
-  output$textZipCodes_C <- renderText({
-    req(input$idZipCodes_C)
+  output$Text_Zip_Codes_Cases <- renderText({
+    req(input$ID_Zip_Codes_Cases)
     
     # Filter the data to the town/city selected by the user
-    data <- filter(zip_daily_C, Town.City == input$idZipCodes_C)
+    data <- filter(zip_daily_C, Town.City == input$ID_Zip_Codes_Cases)
     
     paste(
       '<br><b>Note: This graph does not reflect the most recent cases due to case investigation and data processing. 
-      The data in the chart represents the cases in ', input$idZipCodes_C, ', NY (n=', format(sum(data$Count), big.mark = ','), ') as 
-      of ', format(max(cases_C$Date), '%B %d, %Y'), '. The reported cases in ', input$idZipCodes_C, ' represent ', 
+      The data in the chart represents the cases in ', input$ID_Zip_Codes_Cases, ', NY (n=', format(sum(data$Count), big.mark = ','), ') as 
+      of ', format(max(cases_C$Date), '%B %d, %Y'), '. The reported cases in ', input$ID_Zip_Codes_Cases, ' represent ', 
       sprintf('%0.2f%%', sum(data$Count) / sum(cases_C$Count) * 100), ' of all cases reported.</b><br><br>', sep = '')
   })
   
   # Vaccination ----------------------------------------------------------------
-  output$vaccination_C_Plotly <- renderPlotly({
+  output$Plotly_Vaccination_Cases <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(cases_C$Count), sum(vaccination_C$Count), titleStrings$vaccination_C)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(vaccination_C$Count), big.mark = ','), ')', sep = '')
@@ -944,7 +916,7 @@ server <- function(input, output, session) {
     
     # Create the chart based on user input
     switch (
-      input$vaccination_C_ID,
+      input$ID_Vaccination_Cases,
       'Bar Graph' = {
         data <- group_by(vaccination_C, Vaccinated) %>% summarise(Count = sum(Count))
         
@@ -985,7 +957,7 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10))
   })
   
-  output$vaccination_C_Text <- renderText({
+  output$Text_Vaccination_Cases <- renderText({
     percentages <- GetPercent(vaccination_C, vaccination_C$Vaccinated, vaccination_C$Count, dataValidation$vaccination)
     
     paste(
@@ -996,90 +968,90 @@ server <- function(input, output, session) {
   })
   
   # Deaths ---------------------------------------------------------------------
-  observeEvent(input$startDate_Deaths, {
+  observeEvent(input$Start_Date_Deaths, {
     switch(
-      input$deathView,
-      'Daily' = updateDateInput(session, 'endDate_Deaths', min = input$startDate_Deaths + 6),
-      'Weekly' = updateDateInput(session, 'endDate_Deaths', min = input$startDate_Deaths + 34),
-      'Monthly' = updateDateInput(session, 'endDate_Deaths', min = input$startDate_Deaths %m+% months(5))
+      input$Selected_Death_View,
+      'Daily' = updateDateInput(session, 'End_Date_Deaths', min = input$Start_Date_Deaths + 6),
+      'Weekly' = updateDateInput(session, 'End_Date_Deaths', min = input$Start_Date_Deaths + 34),
+      'Monthly' = updateDateInput(session, 'End_Date_Deaths', min = input$Start_Date_Deaths %m+% months(5))
     )
   })
-  observeEvent(input$endDate_Deaths, {
+  observeEvent(input$End_Date_Deaths, {
     switch(
-      input$deathView,
-      'Daily' = updateDateInput(session, 'startDate_Deaths', max = input$endDate_Deaths - 6),
-      'Weekly' = updateDateInput(session, 'startDate_Deaths', max = input$endDate_Deaths - 34),
-      'Monthly' = updateDateInput(session, 'startDate_Deaths', max = input$endDate_Deaths %m-% months(5))
+      input$Selected_Death_View,
+      'Daily' = updateDateInput(session, 'Start_Date_Deaths', max = input$End_Date_Deaths - 6),
+      'Weekly' = updateDateInput(session, 'Start_Date_Deaths', max = input$End_Date_Deaths - 34),
+      'Monthly' = updateDateInput(session, 'Start_Date_Deaths', max = input$End_Date_Deaths %m-% months(5))
     )
   })
   
-  output$startDate_Deaths <- renderUI({
-    req(input$deathView)
+  output$Start_Date_Deaths <- renderUI({
+    req(input$Selected_Death_View)
     switch (
-      input$deathView,
+      input$Selected_Death_View,
       'Daily' = {
         data <- GetDateData(deaths_D, 'day')
-        dateInput('startDate_Deaths', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
+        dateInput('Start_Date_Deaths', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(deaths_D, 'week')
-        dateInput('startDate_Deaths', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('Start_Date_Deaths', 'Start Date', value = min(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(deaths_D, 'month')
         min_date <- min(floor_date(data$Date, 'month'))
         max_date <- max(ceiling_date(data$Date, 'month')) - 1
-        CustomDateInput('startDate_Deaths', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
+        CustomDateInput('Start_Date_Deaths', 'Start Date', startview = 'year', minview = 'months', maxview = 'decades', value = min_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
       'Yearly' = {
         data <- GetDateData(deaths_D, 'year')
-        dateInput('startDate_Deaths', 'Start Date', value = min(data$Date))
-        shinyjs::disable('startDate_Deaths')
+        dateInput('Start_Date_Deaths', 'Start Date', value = min(data$Date))
+        shinyjs::disable('Start_Date_Deaths')
       }
     )
   })
-  output$endDate_Deaths <- renderUI({
-    req(input$deathView)
+  output$End_Date_Deaths <- renderUI({
+    req(input$Selected_Death_View)
     switch (
-      input$deathView,
+      input$Selected_Death_View,
       'Daily' = {
         data <- GetDateData(deaths_D, 'day')
-        dateInput('endDate_Deaths', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
+        dateInput('End_Date_Deaths', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month')
       },
       'Weekly' = {
         data <- GetDateData(deaths_D, 'week')
-        dateInput('endDate_Deaths', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
+        dateInput('End_Date_Deaths', 'End Date', value = max(data$Date), min = min(data$Date), max = max(data$Date), format = 'mm/dd/yyyy', startview = 'month', daysofweekdisabled = c(1, 2, 3, 4, 5, 6))
       },
       'Monthly' = {
         data <- GetDateData(deaths_D, 'month')
         min_date <- as.Date(min(floor_date(data$Date, 'month')))
         max_date <- as.Date(max(ceiling_date(data$Date, 'month'))) - 1
-        CustomDateInput('endDate_Deaths', 'End Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
+        CustomDateInput('End_Date_Deaths', 'End Date', startview = 'year', minview = 'months', maxview = 'decades', value = max_date, min = min_date, max = max_date, format = 'M, yyyy')
       },
       'Yearly' = {
         data <- GetDateData(deaths_D, 'year')
-        dateInput('endDate_Deaths', 'Start Date', value = min(data$Date))
-        shinyjs::disable('startDate_Deaths')
+        dateInput('End_Date_Deaths', 'Start Date', value = min(data$Date))
+        shinyjs::disable('Start_Date_Deaths')
       }
     )
   })
   
   deaths <- reactive({
-    req(input$deathView, input$startDate_Deaths, input$endDate_Deaths)
+    req(input$Selected_Death_View, input$Start_Date_Deaths, input$End_Date_Deaths)
     
     switch (
-      input$deathView,
-      'Daily'   = deaths <- GetDateLimitedData(deaths_D, input$startDate_Deaths, input$endDate_Deaths, 'day'),
-      'Weekly'  = deaths <- GetDateLimitedData(deaths_D, input$startDate_Deaths, input$endDate_Deaths, 'week'),
-      'Monthly' = deaths <- GetDateLimitedData(deaths_D, input$startDate_Deaths, input$endDate_Deaths, 'month'),
+      input$Selected_Death_View,
+      'Daily'   = deaths <- GetDateLimitedData(deaths_D, input$Start_Date_Deaths, input$End_Date_Deaths, 'day'),
+      'Weekly'  = deaths <- GetDateLimitedData(deaths_D, input$Start_Date_Deaths, input$End_Date_Deaths, 'week'),
+      'Monthly' = deaths <- GetDateLimitedData(deaths_D, input$Start_Date_Deaths, input$End_Date_Deaths, 'month'),
       'Yearly'  = deaths <- GetDateData(deaths_D, 'year')
     )
-    list(deaths=deaths, iselview=input$deathView)
+    list(deaths=deaths, iselview=input$Selected_Death_View)
   })
   
   deaths_db <- debounce(deaths, millis = 300)
   
-  output$plotlyDeaths_D <- renderPlotly({
+  output$Plotly_Deaths <- renderPlotly({
     temp <- req(deaths_db())
     data <- temp$deaths
     
@@ -1125,7 +1097,7 @@ server <- function(input, output, session) {
     plot <- plot %>% FormatY_Axis('Deaths')
   })
   
-  output$textDeaths_D <- renderText({
+  output$Text_Deaths <- renderText({
     temp <- req(deaths_db())
     data <- temp$deaths
     
@@ -1155,7 +1127,7 @@ server <- function(input, output, session) {
   })
   
   # Age Group ------------------------------------------------------------------
-  output$plotlyAgeGroup_D <- renderPlotly({
+  output$Plotly_Age_Group_Deaths <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(deaths_D$Count), sum(ageGroup_D$Count), titleStrings$ageGroup_D)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(ageGroup_D$Count), big.mark = ','), ')', sep = '')
@@ -1163,19 +1135,13 @@ server <- function(input, output, session) {
     colors <- c(myColors$green, myColors$purple, myColors$orange, myColors$red, myColors$blue)
     
     # Create the chart based on user input
-    switch (input$idAgeGroup_D,
+    switch (input$ID_Age_Group_Deaths,
             'Bar Graph' = {
               data <- group_by(ageGroup_D, Age.Group) %>% summarise(Count = sum(Count))
               
               plot <- MakePlotlyBar(data, data$Age.Group, data$Count, colors) %>%
                 FormatX_Axis('Age Group', 'category ascending') %>%
                 FormatY_Axis('Deaths')
-            },
-            'Pie Chart' = {
-              data <- group_by(ageGroup_D, Age.Group) %>% summarise(Count = sum(Count))
-              
-              plot <- MakePlotlyPie(data, data$Age.Group, data$Count, 'Age Group', 'Deaths', colors) %>%
-                layout(legend = list(x = .9, y = .5))
             },
             'Line Graph' = {
               data <- ageGroup_D %>% pivot_wider(names_from = Age.Group, values_from = Count)
@@ -1196,7 +1162,7 @@ server <- function(input, output, session) {
     plot <- plot %>% SetTitle(first_line, second_line)
   })
   
-  output$textAgeGroup_D <- renderText({
+  output$Text_Age_Group_Deaths <- renderText({
     percentages <- GetPercent(ageGroup_D, ageGroup_D$Age.Group, ageGroup_D$Count, dataValidation$ageGroup)
     
     paste(
@@ -1208,7 +1174,7 @@ server <- function(input, output, session) {
   })
   
   # Gender ---------------------------------------------------------------------
-  output$plotlyGender_D <- renderPlotly({
+  output$Plotly_Gender_Deaths <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(deaths_D$Count), sum(gender_D$Count), titleStrings$gender_D)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(gender_D$Count), big.mark = ','), ')', sep = '')
@@ -1217,7 +1183,7 @@ server <- function(input, output, session) {
     
     # Create the chart based on user input
     switch (
-      input$idGender_D,
+      input$ID_Gender_Deaths,
       'Bar Graph' = {
         data <- group_by(gender_D, Gender) %>% summarise(Count = sum(Count))
         
@@ -1255,7 +1221,7 @@ server <- function(input, output, session) {
     plot <- plot %>% SetTitle(first_line, second_line)
   })
   
-  output$textGender_D <- renderText({
+  output$Text_Gender_Deaths <- renderText({
     
     paste(
       '<br><b>Note: Due to delays in reporting recent data are incomplete.',
@@ -1265,7 +1231,7 @@ server <- function(input, output, session) {
   })
   
   # Race -----------------------------------------------------------------------
-  output$plotlyRace_D <- renderPlotly({
+  output$Plotly_Race_Deaths <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(deaths_D$Count), sum(race_D$Count), titleStrings$race_D)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(race_D$Count), big.mark = ','), ')', sep = '')
@@ -1274,7 +1240,7 @@ server <- function(input, output, session) {
     
     # Create the chart based on user input
     switch (
-      input$idRace_D,
+      input$ID_Race_Deaths,
       'Bar Graph' = {
         data <- group_by(race_D, Race) %>% summarise(Count = sum(Count))
         data$Race[data$Race == 'Asian/Native Hawaiian/Other Pacific Islander'] = 'Asian/\nNative Hawaiian/\nOther Pacific Islander'
@@ -1283,14 +1249,6 @@ server <- function(input, output, session) {
         plot <- MakePlotlyBar(data, data$Race, data$Count, colors) %>%
           FormatX_Axis('Race', 'total descending') %>%
           FormatY_Axis('Deaths')
-      },
-      'Pie Chart' = {
-        data <- group_by(race_D, Race) %>% summarise(Count = sum(Count))
-        data$Race[data$Race == 'Asian/Native Hawaiian/Other Pacific Islander'] = 'Asian/\nNative Hawaiian/\nOther Pacific Islander'
-        data$Race[data$Race == 'Native American/Alaska Native'] = 'Native American/\nAlaska Native'
-        
-        plot <- MakePlotlyPie(data, data$Race, data$Count, 'Race', 'Deaths', colors) %>%
-          layout(legend = list(x = .9, y = .5))
       },
       'Line Graph' = {
         data <- race_D %>% pivot_wider(names_from = Race, values_from = Count) %>%
@@ -1303,31 +1261,11 @@ server <- function(input, output, session) {
         plot <- data %>%
           # Create the graph with just the x-axis, no data on the graph
           plot_ly(x = ~ Date, hovertemplate = paste('<b>%{y}</b>')) %>%
-          # Add trace for Asian
-          add_trace(
-            y = ~Asian, legendgroup = names[1], name = names[1],
-            type = 'scatter', mode = 'lines', line = list(color = colors[1]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[1], '</b>:', format(data$Asian, big.mark = ','))) %>%
-          # Add trace for Black
-          add_trace(
-            y = ~Black, legendgroup = names[2], name = names[2],
-            type = 'scatter', mode = 'lines', line = list(color = colors[2]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[2], '</b>:', format(data$Black, big.mark = ','))) %>%
-          # Add trace for Native
-          add_trace(
-            y = ~Native, legendgroup = names[3], name = names[3],
-            type = 'scatter', mode = 'lines', line = list(color = colors[3]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[3], '</b>:', format(data$Native, big.mark = ','))) %>%
-          # Add trace for Other
-          add_trace(
-            y = ~Other, legendgroup = names[4], name = names[4],
-            type = 'scatter', mode = 'lines', line = list(color = colors[4]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[4], '</b>:', format(data$Other, big.mark = ','))) %>%
-          # Add trace for White
-          add_trace(
-            y = ~White, legendgroup = names[5], name = names[5],
-            type = 'scatter', mode = 'lines', line = list(color = colors[5]), hoverinfo = 'text',
-            hovertext = paste('<b>', names[5], '</b>:', format(data$White, big.mark = ',')))
+          add_trace(y = ~Asian,  legendgroup = names[1], name = names[1], type = 'scatter', mode = 'lines', line = list(color = colors[1]), hoverinfo = 'text', hovertext = paste('<b>', names[1], '</b>:', format(data$Asian, big.mark = ','))) %>%
+          add_trace(y = ~Black,  legendgroup = names[2], name = names[2], type = 'scatter', mode = 'lines', line = list(color = colors[2]), hoverinfo = 'text', hovertext = paste('<b>', names[2], '</b>:', format(data$Black, big.mark = ','))) %>%
+          add_trace(y = ~Native, legendgroup = names[3], name = names[3], type = 'scatter', mode = 'lines', line = list(color = colors[3]), hoverinfo = 'text', hovertext = paste('<b>', names[3], '</b>:', format(data$Native, big.mark = ','))) %>%
+          add_trace(y = ~Other,  legendgroup = names[4], name = names[4], type = 'scatter', mode = 'lines', line = list(color = colors[4]), hoverinfo = 'text', hovertext = paste('<b>', names[4], '</b>:', format(data$Other, big.mark = ','))) %>%
+          add_trace(y = ~White,  legendgroup = names[5], name = names[5], type = 'scatter', mode = 'lines', line = list(color = colors[5]), hoverinfo = 'text', hovertext = paste('<b>', names[5], '</b>:', format(data$White, big.mark = ',')))
         
         
         data$MaxDeaths <- pmax(data$White, data$Black, data$Native, data$Asian, data$Other)
@@ -1345,7 +1283,7 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10))
   })
   
-  output$textRace_D <- renderText({
+  output$Text_Race_Deaths <- renderText({
     percentages <- GetPercent(race_D, race_D$Race, race_D$Count, dataValidation$race)
     
     paste(
@@ -1358,7 +1296,7 @@ server <- function(input, output, session) {
   })
   
   # Ethnicity ------------------------------------------------------------------
-  output$plotlyEthnicity_D <- renderPlotly({
+  output$Plotly_Ethnicity_Deaths <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(deaths_D$Count), sum(ethnicity_D$Count), titleStrings$ethnicity_D)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(ethnicity_D$Count), big.mark = ','), ')', sep = '')
@@ -1367,7 +1305,7 @@ server <- function(input, output, session) {
     
     # Create the chart based on user input
     switch (
-      input$idEthnicity_D,
+      input$ID_Ethnicity_Deaths,
       'Bar Graph' = {
         data <- group_by(ethnicity_D, Ethnicity) %>% summarise(Count = sum(Count))
         
@@ -1425,7 +1363,7 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10))
   })
   
-  output$textEthnicity_D <- renderText({
+  output$Text_Ethnicity_Deaths <- renderText({
     paste(
       '<br><b>Note: Due to delays in reporting recent data are incomplete. ',
       if (sum(ethnicity_D$Count) < sum(deaths_D$Count)) { paste(' Missing data (n=', format(sum(deaths_D$Count) - sum(ethnicity_D$Count), big.mark = ','), ').</b><br><br>', sep = '') },
@@ -1434,13 +1372,13 @@ server <- function(input, output, session) {
   })
   
   # Top Zip Codes --------------------------------------------------------------
-  output$plotlyTopZipCodes_D <- renderPlotly({
-    req(input$idTopZipCodes_D)
+  output$Plotly_Top_Zip_Codes_Deaths <- renderPlotly({
+    req(input$ID_Top_Zip_Codes_Deaths)
     
     # Create the strings for the title
-    data <- topZipCodes_D %>% slice_head(n = input$idTopZipCodes_D)
+    data <- topZipCodes_D %>% slice_head(n = input$ID_Top_Zip_Codes_Deaths)
     
-    first_line <- paste(titleStrings$topZip_D, ' (Top ', input$idTopZipCodes_D, ')', sep = '')
+    first_line <- paste(titleStrings$topZip_D, ' (Top ', input$ID_Top_Zip_Codes_Deaths, ')', sep = '')
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(data$Count), big.mark = ','), ')', sep = '')
     
     colors <- c(myColors$green, myColors$purple, myColors$orange, myColors$red, myColors$blue, myColors$yellow, myColors$lblue, myColors$dgreen,
@@ -1476,27 +1414,27 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10))
   })
   
-  output$textTipZipCodes_D <- renderText({
+  output$Text_Top_Zip_Codes_Deaths <- renderText({
     paste(
       '<br><b>Note: Data are incomplete due to ongoing case investigation. ',
-      str_to_title(as.english(input$idTopZipCodes_D)), ' most reported zip codes represented in graph (n=',
-      format(sum(top_n(topZipCodes_D, input$idTopZipCodes_D, Count)$Count), big.mark = ','), ') representing ',
-      sprintf('%0.1f%%', sum(top_n(topZipCodes_D, input$idTopZipCodes_D, Count)$Count) / sum(deaths_D$Count) * 100), ' of deaths.</b><br><br>',
+      str_to_title(as.english(input$ID_Top_Zip_Codes_Deaths)), ' most reported zip codes represented in graph (n=',
+      format(sum(top_n(topZipCodes_D, input$ID_Top_Zip_Codes_Deaths, Count)$Count), big.mark = ','), ') representing ',
+      sprintf('%0.1f%%', sum(top_n(topZipCodes_D, input$ID_Top_Zip_Codes_Deaths, Count)$Count) / sum(deaths_D$Count) * 100), ' of deaths.</b><br><br>',
       sep = ''
     )
   })
   
   # Zip Codes by Date ----------------------------------------------------------
-  output$plotlyZipCodes_D <- renderPlotly({
-    req(input$idZipCodes_D)
+  output$Plotly_Zip_Codes_Deaths <- renderPlotly({
+    req(input$ID_Zip_Codes_Deaths)
     
     # Filter the data to the town/city selected by the user
-    data <- filter(zip_daily_D, Town.City == input$idZipCodes_D)
+    data <- filter(zip_daily_D, Town.City == input$ID_Zip_Codes_Deaths)
     data <- data[order(data$Date, decreasing = FALSE), ]
     
     # Create string for the title
     first_line <- 'Confirmed Deaths of COVID-19'
-    second_line <- paste(input$idZipCodes_D, ', NY - As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(data$Count), big.mark = ','), ')', sep = '')
+    second_line <- paste(input$ID_Zip_Codes_Deaths, ', NY - As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(data$Count), big.mark = ','), ')', sep = '')
     
     plot <- MakePlotlyLine(data, data$Date, data$Count, myColors$blue)
     
@@ -1509,21 +1447,21 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10), hovermode = 'x')
   })
   
-  output$textZipCodes_D <- renderText({
-    req(input$idZipCodes_D)
+  output$Text_Zip_Codes_Deaths <- renderText({
+    req(input$ID_Zip_Codes_Deaths)
     
     # Filter the data to the town/city selected by the user
-    data <- filter(zip_daily_D, Town.City == input$idZipCodes_D)
+    data <- filter(zip_daily_D, Town.City == input$ID_Zip_Codes_Deaths)
     
     paste(
       '<br><b>Note: This graph does not reflect the most recent deaths due to case investigation and data processing. 
-      The data in the chart represents the deaths in ', input$idZipCodes_D, ', NY (n=', format(sum(data$Count), big.mark = ','), ') as 
-      of ', format(max(deaths_D$Date), '%B %d, %Y'), '. The reported deaths in ', input$idZipCodes_D, ' represent ', 
+      The data in the chart represents the deaths in ', input$ID_Zip_Codes_Deaths, ', NY (n=', format(sum(data$Count), big.mark = ','), ') as 
+      of ', format(max(deaths_D$Date), '%B %d, %Y'), '. The reported deaths in ', input$ID_Zip_Codes_Deaths, ' represent ', 
       sprintf('%0.2f%%', sum(data$Count) / sum(deaths_D$Count) * 100), ' of all deaths reported.</b><br><br>', sep = '')
   })
   
   # Vaccination ----------------------------------------------------------------
-  output$vaccination_D_Plotly <- renderPlotly({
+  output$Plotly_Vaccination_Deaths <- renderPlotly({
     # Create the strings for the title
     first_line <- CheckTitleWhereKnown(sum(deaths_D$Count), sum(vaccination_D$Count), titleStrings$vaccination_D)
     second_line <- paste(OC_string, 'As of ', format(max(cases_C$Date), '%B %d, %Y'), ' (n=', format(sum(vaccination_D$Count), big.mark = ','), ')', sep = '')
@@ -1532,7 +1470,7 @@ server <- function(input, output, session) {
     
     # Create the chart based on user input
     switch (
-      input$vaccination_D_ID,
+      input$ID_Vaccination_Deaths,
       'Bar Graph' = {
         data <- group_by(vaccination_D, Vaccinated) %>% summarise(Count = sum(Count))
         
@@ -1573,7 +1511,7 @@ server <- function(input, output, session) {
       layout(margin = list(l = 10, r = 10, b = 10, t = 100, pad = 10))
   })
   
-  output$vaccination_D_Text <- renderText({
+  output$Text_Vaccination_Deaths <- renderText({
     percentages <- GetPercent(vaccination_D, vaccination_D$Vaccinated, vaccination_D$Count, dataValidation$vaccination)
     temp <- sum(filter(deaths_D, Date >= as.Date(as.character(20210101), format = '%Y%m%d'))[,2])
     
